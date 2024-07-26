@@ -1,4 +1,11 @@
 import WebpackLicense from '@components/webpack-license';
+import AssetInfoType from '../../types/asset-info.mdx';
+import SourceType from '../../types/source.mdx';
+import ChunkGroupType from '../../types/chunk-group.mdx';
+import EntrypointType from '../../types/entrypoint.mdx';
+import ModuleType from '../../types/module.mdx';
+import ChunkType from '../../types/chunk.mdx';
+import RspackErrorType from '../../types/rspack-error.mdx';
 
 <WebpackLicense from="https://webpack.docschina.org/api/compilation-object/" />
 
@@ -25,6 +32,9 @@ emitAsset(
   info?: AssetInfo // 产物信息对象
 ): void;
 ```
+
+<SourceType />
+<AssetInfoType />
 
 以下示例将添加一个 `asset-name.js` 的新产物且不会被压缩：
 
@@ -393,15 +403,7 @@ compiler.hooks.compilation.tap('MyPlugin', compilation => {
 
 获取 Chunk Group 对象列表，结构如下：
 
-```ts
-type ChunkGroup = {
-  name?: Readonly<string>; // 名称
-  index?: Readonly<number>; // 索引序
-  chunks: ReadonlyArray<Chunk>; // 包含的 chunk 列表
-  getFiles(): ReadonlyArray<string>; // 关联的文件列表
-  getParents(): ReadonlyArray<ChunkGroup>; // 父 chunk group 列表
-};
-```
+<ChunkGroupType />
 
 ### entrypoints
 
@@ -409,11 +411,7 @@ type ChunkGroup = {
 
 获取 Entry 对象映射表，其为作为入口的特殊的 Chunk Group，会额外包含一个 Runtime Chunk。
 
-```ts
-type Entrypoint = {
-  getRuntimeChunk(): Readonly<Chunk | null>;
-} & ChunkGroup;
-```
+<EntrypointType />
 
 ### namedChunkGroups
 
@@ -427,26 +425,7 @@ type Entrypoint = {
 
 获取所有模块，其结构如下：
 
-```ts
-type Module = {
-  context?: string;
-  resource?: string;
-  request?: string;
-  userRequest?: string;
-  rawRequest?: string;
-  factoryMeta?: JsFactoryMeta;
-  buildInfo: Record<string, any>;
-  buildMeta: Record<string, any>;
-  originalSource(): {
-    isRaw: boolean;
-    isBuffer: boolean;
-    source: Buffer;
-    map?: Buffer;
-  } | null;
-  identifier(): string;
-  nameForCondition(): string | null;
-};
-```
+<ModuleType />
 
 ### chunks
 
@@ -454,30 +433,7 @@ type Module = {
 
 获取所有 Chunk，其结构如下：
 
-```ts
-type Chunk = {
-  name?: string;
-  id?: string;
-  ids: string[];
-  idNameHints: string[];
-  filenameTemplate?: string;
-  cssFilenameTemplate?: string;
-  files: Set<string>;
-  runtime: Set<string>;
-  hash?: string;
-  contentHash: Record<string, string>;
-  renderedHash?: string;
-  chunkReason?: string;
-  auxiliaryFiles: Set<string>;
-  isOnlyInitial(): boolean;
-  canBeInitial(): boolean;
-  hasRuntime(): boolean;
-  groupsIterable: Set<ChunkGroup>;
-  getAllAsyncChunks(): Set<Chunk>;
-  getAllInitialChunks(): Set<Chunk>;
-  getAllReferencedChunks(): Set<Chunk>;
-};
-```
+<ChunkType />
 
 ### namedChunks
 
@@ -523,16 +479,7 @@ type CompilationDependencies = {
 
 获取构建期间产生的错误对象列表，其结构如下：
 
-```ts
-type RspackError = {
-  name: string;
-  message: string;
-  moduleIdentifier?: string;
-  file?: string;
-  stack?: string;
-  hideStack?: boolean;
-};
-```
+<RspackErrorType />
 
 ### warnings
 

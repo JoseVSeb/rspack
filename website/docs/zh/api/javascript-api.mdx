@@ -1,6 +1,9 @@
 import WebpackLicense from '@components/webpack-license';
 import { PackageManagerTabs } from '@theme';
 import { ApiMeta, Stability } from '@components/ApiMeta';
+import CompilerType from '../types/compiler.mdx';
+import WatchingType from '../types/watching.mdx';
+import StatsType from '../types/stats.mdx';
 
 <WebpackLicense from="https://webpack.docschina.org/api/node/" />
 
@@ -62,6 +65,8 @@ rspack({}, (err, stats) => {
 
 使用 `run` 方法启动所有编译工作。完成之后，执行传入的的 `callback` 函数。最终记录下来的概括信息（stats）和错误（errors），都应在这个 callback 函数中获取。
 
+<CompilerType />
+
 :::warning 警告
 这个 API 一次仅支持一个编译。当使用 `run` 或者 `watch` 时，调用 `close`，并等待它完成后再次执行 `run` 或者 `watch`。并发编译将破坏输出文件。
 :::
@@ -120,6 +125,8 @@ const watching = compiler.watch(
 
 `Watching` 配置选项的细节可以在[这里](/config/watch#watchoptions)查询。
 
+<WatchingType />
+
 :::warning 警告
 文件系统不正确的问题，可能会对单次修改触发多次构建。因此，在上面的示例中，一次修改可能会多次触发 `console.log` 语句。用户应该预知此行为，并且可能需要检查 `stats.hash` 来查看文件哈希是否确实变更。
 :::
@@ -155,6 +162,8 @@ watching.invalidate();
 - 模块和 chunk 信息
 
 [Rspack CLI](/api/cli) 正是基于这些信息在控制台展示友好的格式输出。
+
+<StatsType />
 
 :::tip 提示
 当使用 `MultiCompiler` 时，会返回一个 `MultiStats` 实例，它实现与 `stats` 相同的接口，也就是下面描述的方法。

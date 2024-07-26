@@ -1,4 +1,9 @@
 import { Badge } from '@theme';
+import ModuleType from '../../types/module.mdx';
+import ChunkType from '../../types/chunk.mdx';
+import RuntimeModuleType from '../../types/runtime-module.mdx';
+import SourceType from '../../types/source.mdx';
+import HashType from '../../types/hash.mdx';
 
 # Compilation 钩子
 
@@ -16,26 +21,7 @@ Rspack 主要编译逻辑运行在 Rust 侧。出于稳定性、性能、架构�
 - **参数：**
   - `Module`：模块实例
 
-```ts
-type Module = {
-  context?: string;
-  resource?: string;
-  request?: string;
-  userRequest?: string;
-  rawRequest?: string;
-  factoryMeta?: JsFactoryMeta;
-  buildInfo: Record<string, any>;
-  buildMeta: Record<string, any>;
-  originalSource(): {
-    isRaw: boolean;
-    isBuffer: boolean;
-    source: Buffer;
-    map?: Buffer;
-  } | null;
-  identifier(): string;
-  nameForCondition(): string | null;
-};
-```
+<ModuleType />
 
 ## `executeModule`
 
@@ -117,30 +103,7 @@ type ExecuteModuleContext = {
   - `Chunk[]`：Chunk 列表：
   - `Module[]`：模块列表
 
-```ts
-type Chunk = {
-  name?: string;
-  id?: string;
-  ids: string[];
-  idNameHints: string[];
-  filenameTemplate?: string;
-  cssFilenameTemplate?: string;
-  files: Set<string>;
-  runtime: Set<string>;
-  hash?: string;
-  contentHash: Record<string, string>;
-  renderedHash?: string;
-  chunkReason?: string;
-  auxiliaryFiles: Set<string>;
-  isOnlyInitial(): boolean;
-  canBeInitial(): boolean;
-  hasRuntime(): boolean;
-  groupsIterable: Set<ChunkGroup>;
-  getAllAsyncChunks(): Set<Chunk>;
-  getAllInitialChunks(): Set<Chunk>;
-  getAllReferencedChunks(): Set<Chunk>;
-};
-```
+<ChunkType />
 
 ## `optimizeChunkModules`
 
@@ -179,19 +142,7 @@ enum RuntimeGlobals {}
   - `RuntimeModule`：运行时模块
   - `Chunk`：Chunk 实例
 
-```ts
-type RuntimeModule = {
-  source?: {
-    isRaw: boolean;
-    isBuffer: boolean;
-    source: Buffer;
-    map?: Buffer;
-  };
-  moduleIdentifier: string;
-  constructorName: string;
-  name: string;
-};
-```
+<RuntimeModuleType />
 
 ## `processAssets`
 
@@ -205,17 +156,10 @@ type RuntimeModule = {
   - `assets: Assets`: 一个对象，其中 key 是 asset 的路径名，值是由 [Source](https://github.com/webpack/webpack-sources#source) 表示的 asset 数据。
 
 ```ts
-type Assets = Record<
-  string,
-  {
-    source(): string | ArrayBuffer;
-    buffer(): Buffer;
-    size(): number;
-    map(options?: MapOptions): RawSourceMap | null;
-    sourceAndMap(options?: MapOptions): SourceAndMapResult;
-  }
->;
+type Assets = Record<string, Source>;
 ```
+
+<SourceType />
 
 ### Process assets 示例
 
@@ -331,12 +275,7 @@ compiler.hooks.thisCompilation.tap('MyPlugin', compilation => {
   - `Chunk`：Chunk 实例
   - `Hash`：Chunk 哈希实例
 
-```ts
-type Hash = {
-  update(data: string | Buffer, inputEncoding?: string): Hash;
-  digest(encoding?: string): string | Buffer;
-};
-```
+<HashType />
 
 ## `chunkAsset`
 

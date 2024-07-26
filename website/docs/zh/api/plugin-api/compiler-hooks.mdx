@@ -1,3 +1,7 @@
+import CompilerType from '../../types/compiler.mdx';
+import CompilationType from '../../types/compilation.mdx';
+import StatsType from '../../types/stats.mdx';
+
 # Compiler 钩子
 
 ## `environment`
@@ -15,6 +19,8 @@
 ## `afterPlugins`
 
 `SyncHook<[Compiler]>`
+
+<CompilerType />
 
 在初始化内部插件完成之后调用。
 
@@ -78,6 +84,8 @@ resolver 设置完成之后触发。
 
 `AsyncSeriesHook<[Compilation]>`
 
+<CompilationType />
+
 在完成并封闭(seal)编译后调用。
 
 ## `thisCompilation`
@@ -121,6 +129,8 @@ make 阶段之前调用。
 ## `done`
 
 `AsyncSeriesHook<Stats>`
+
+<StatsType />
 
 在构建完成时执行。
 
