@@ -1,0 +1,76 @@
+# 使用 Rsdoctor
+
+[Rsdoctor](https://rsdoctor.dev/) 是一个针对 `Rspack` 的构建分析器，可以直观地展示构建过程，例如编译时间、编译前后的代码变化、模块引用关系、重复模块等。如果您需要排查构建产物或构建时编译问题，可以使用 Rsdoctor。
+
+## 💡 什么是 Rsdoctor？
+
+- Rsdoctor 是一个面向构建过程与构建产物提供诊断和分析的一站式工具。
+- Rsdoctor 是一个支持 **Rspack** 或 **webpack** 构建分析工具。
+- Rsdoctor 是一个可以展示编译耗时及编译行为细节的分析工具。
+- Rsdoctor 是一个可以支持 **Rspack builtin:swc-loader** 构建耗时及构建行为分析的工具
+
+## 🔥 特性
+
+- **编译可视化**：Rsdoctor 将编译行为及耗时进行可视化展示，方便开发同学查看构建问题。
+
+| <img src="https://github.com/web-infra-dev/rsdoctor/assets/18437716/eea845fa-f19f-49d4-9bc6-6795688e6a33"  alt="loader timeline" /> | <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/lognuvj/rsdoctor/rsdoctor-analyze-code.png" alt="loader codes" /> |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+
+- **多种分析能力**：支持构建产物、构建时分析能力：
+  - 构建产物支持资源列表及模块依赖等。
+  - 构建时分析支持 Loader、Plugin、Resolver 构建过程分析。
+  - 支持 Rspack 的 builtin:swc-loader 分析。
+  - 构建规则支持重复包检测及 ES Version Check 检查等。
+- **支持自定义规则**：除了内置构建扫描规则外，还支持用户根据 Rsdoctor 的构建数据添加自定义构建扫描规则。
+- **框架无关**：支持所有基于 **Rspack** 或 **webpack** 构建的项目。
+
+### 特性列表
+
+更详细的特性使用介绍你可以查看这篇文档： [features](https://rsdoctor.dev/zh/guide/start/features)。
+
+## 快速开始
+
+在基于 Rspack 构建器的项目中，你可以使用以下方式开启 Rsdoctor：
+
+1. 安装 `RsdoctorRspackPlugin` 插件：
+
+import { PackageManagerTabs } from '@theme';
+
+<PackageManagerTabs command="add @rsdoctor/rspack-plugin -D" />
+
+2. 在构建命令之前添加 `RSDOCTOR=true` 变量：
+
+```bash
+# dev
+RSDOCTOR=true rspack serve
+
+# build
+RSDOCTOR=true rspack build
+```
+
+运行上述命令后，Rspack 会自动注册 Rsdoctor 插件，并在构建完成后打开构建分析页面。完整功能请参考 [Rsdoctor 文档](https://rsdoctor.dev/)。
+
+## Options
+
+:::danger
+
+- 请不要在线上版本构建时使用 Rsdoctor。
+
+:::
+
+在 `rspack.config.js` 的 [plugins](https://www.rspack.dev/config/plugins.html#plugins) 中初始化 RsdoctorRspackPlugin 插件，参考：
+
+```ts title="rspack.config.ts"
+import { RsdoctorRspackPlugin } from '@rsdoctor/rspack-plugin';
+
+export default {
+  // ...
+  plugins: [
+    // Only register the plugin when RSDOCTOR is true, as the plugin will increase the build time.
+    process.env.RSDOCTOR &&
+      new RsdoctorRspackPlugin({
+        // plugin options
+      }),
+  ].filter(Boolean),
+};
+```

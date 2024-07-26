@@ -15,3 +15,12 @@ This command will generate a `.rspack-profile-${timestamp}-${pid}` folder in the
 - `trace.json`: The time spent on each phase of the Rust side is recorded at a granular level using [tracing](https://github.com/tokio-rs/tracing) and can be viewed using [ui.perfetto.dev](https://ui.perfetto.dev/)
 - `jscpuprofile.json`: The time spent at each stage on the JavaScript side is recorded at a granular level using [Node.js inspector](https://nodejs.org/dist/latest-v18.x/docs/api/inspector.html) and can be viewed using [speedscope.app](https://www.speedscope.app/)
 - `logging.json`: Includes some logging information that keeps a coarse-grained record of how long each phase of the build took
+
+### Use Rsdoctor
+
+Rsdoctor is a build analyser that can visually display the compilation time of each loaders and plugins.
+
+Please refer to [Use Rsdoctor](/guide/optimization/use-rsdoctor) for more information.
+
+| <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/lognuvj/rspeedy/loader-analysis.jpeg"  alt="loader timeline" /> | <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/lognuvj/rspeedy/overall-loader.jpeg" alt="loader codes" /> |
+| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |

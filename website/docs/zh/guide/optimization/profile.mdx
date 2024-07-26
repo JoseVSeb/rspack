@@ -15,3 +15,11 @@ $ RSPACK_PROFILE=ALL rspack build
 - `trace.json`：使用 [tracing](https://github.com/tokio-rs/tracing) 细粒度地记录了 Rust 侧各个阶段的耗时，可以使用 [ui.perfetto.dev](https://ui.perfetto.dev/) 进行查看
 - `jscpuprofile.json`：使用 [Node.js inspector](https://nodejs.org/dist/latest-v18.x/docs/api/inspector.html) 细粒度地记录了 JavaScript 侧的各个阶段的耗时，可以使用 [speedscope.app](https://www.speedscope.app/) 进行查看
 - `logging.json`：包含一些日志信息，粗粒度地记录了构建的各个阶段耗时
+
+### 使用 Rsdoctor
+
+你可以通过使用 Rsdoctor 来查看 Loader 和 Plugin 的编译耗时及编译过程。
+请跳转到 [Use Rsdoctor](/guide/optimization/use-rsdoctor) 获取更多信息。
+
+| <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/lognuvj/rspeedy/loader-analysis.jpeg"  alt="loader timeline" /> | <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/lognuvj/rspeedy/overall-loader.jpeg" alt="loader codes" /> |
+| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
