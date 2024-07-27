@@ -75,7 +75,7 @@ speedscope CPU.20230522.154658.14577.0.001.cpuprofile
 
 ![image](https://github.com/web-infra-dev/rsdoctor/assets/18437716/eea845fa-f19f-49d4-9bc6-6795688e6a33)
 
-开启 `RsdoctorRspackPlugin`，可以参照文档：[使用 Rsdoctor](/guide/optimization/use-rsdoctor)。
+关于如何启用 `RsdoctorRspackPlugin`，可以参考 [使用 Rsdoctor](/guide/optimization/use-rsdoctor)。
 
 - `RsdoctorRspackPlugin` 的 `features.loader` 和 `features.plugins` 参数需要为 `true`，`features.loader` 和 `features.plugins` 是默认开启的。查看参数文档[Rsdoctor options](https://rsdoctor.dev/zh/config/options/options#features)。
 - 使用文档：
